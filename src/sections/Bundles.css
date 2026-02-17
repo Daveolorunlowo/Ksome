@@ -1,0 +1,157 @@
+.bundles-section {
+    padding: var(--spacing-xl) 0;
+}
+
+.bundles-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-lg);
+}
+
+.bundle-card {
+    padding: var(--spacing-2xl);
+    border-radius: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.bundle-title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--color-text-main);
+    margin-bottom: var(--spacing-md);
+}
+
+.bundle-desc {
+    color: var(--color-text-muted);
+    margin-bottom: var(--spacing-xl);
+    max-width: 400px;
+    line-height: 1.5;
+}
+
+/* Office Card Specifics */
+.office-card {
+    background-color: var(--color-accent-blue);
+}
+
+.office-card .bundle-title,
+.office-card .bundle-desc,
+.office-card .bundle-link {
+    color: inherit;
+}
+
+.bundle-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: gap var(--transition-fast);
+}
+
+.bundle-link:hover {
+    gap: 0.75rem;
+}
+
+/* Club Card Specifics */
+.club-card {
+    background-color: var(--color-accent-peach);
+}
+
+.club-card .bundle-title,
+.club-card .bundle-desc {
+    color: inherit;
+}
+
+.club-form {
+    display: flex;
+    gap: 0.5rem;
+    max-width: 400px;
+}
+
+.club-input {
+    flex: 1;
+    padding: 0.75rem 1rem;
+    border-radius: 9999px;
+    border: 1px solid transparent;
+    font-family: inherit;
+    transition: all var(--transition-fast);
+}
+
+.club-input:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(232, 158, 40, 0.2);
+}
+
+.club-btn {
+    padding: 0.75rem 1.5rem;
+    background-color: #D97706;
+    /* Darker orange */
+    color: white;
+    font-weight: 700;
+    border-radius: 9999px;
+    transition: background-color var(--transition-fast);
+}
+
+.club-btn:hover {
+    background-color: #B45309;
+}
+
+@media (max-width: 768px) {
+    .bundles-container {
+        grid-template-columns: 1fr;
+    }
+
+    .bundle-card {
+        padding: var(--spacing-xl);
+    }
+}
+
+/* Coming Soon Styles */
+.coming-soon-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, #D97706, #F59E0B);
+    color: white;
+    padding: 0.35rem 1rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: var(--spacing-md);
+    animation: pulse-badge 2s ease-in-out infinite;
+}
+
+@keyframes pulse-badge {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+.coming-soon-message {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    background: rgba(255, 255, 255, 0.3);
+    padding: var(--spacing-md) var(--spacing-lg);
+    border-radius: 12px;
+    max-width: 400px;
+}
+
+.coming-soon-message span {
+    font-size: 2rem;
+}
+
+.coming-soon-message p {
+    font-size: 0.9rem;
+    color: inherit;
+    margin: 0;
+    line-height: 1.4;
+}

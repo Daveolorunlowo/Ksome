@@ -1,0 +1,528 @@
+.worker-auth-page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-xl);
+    background: linear-gradient(135deg, #2d1b0e 0%, #4a2c17 50%, #6b3d1f 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Animated background pattern */
+.worker-auth-page::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image:
+        radial-gradient(circle at 10% 20%, rgba(255, 165, 0, 0.15) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(255, 107, 53, 0.2) 0%, transparent 40%),
+        radial-gradient(circle at 50% 50%, rgba(139, 69, 19, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 30% 70%, rgba(255, 193, 7, 0.12) 0%, transparent 35%),
+        radial-gradient(circle at 70% 30%, rgba(255, 87, 51, 0.15) 0%, transparent 45%);
+    pointer-events: none;
+}
+
+/* Scattered floating characters */
+.scattered-char {
+    position: absolute;
+    font-size: 2rem;
+    opacity: 0.2;
+    pointer-events: none;
+    animation: float 8s ease-in-out infinite;
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0) rotate(0deg);
+    }
+
+    25% {
+        transform: translateY(-15px) rotate(5deg);
+    }
+
+    50% {
+        transform: translateY(-5px) rotate(-3deg);
+    }
+
+    75% {
+        transform: translateY(-20px) rotate(8deg);
+    }
+}
+
+/* Different positions and animation delays for each character */
+.scattered-char:nth-child(1) {
+    top: 5%;
+    left: 8%;
+    animation-delay: 0s;
+    font-size: 2.5rem;
+}
+
+.scattered-char:nth-child(2) {
+    top: 12%;
+    right: 15%;
+    animation-delay: -1s;
+    font-size: 1.8rem;
+}
+
+.scattered-char:nth-child(3) {
+    top: 25%;
+    left: 5%;
+    animation-delay: -2s;
+    font-size: 2.2rem;
+}
+
+.scattered-char:nth-child(4) {
+    top: 18%;
+    right: 8%;
+    animation-delay: -0.5s;
+    font-size: 3rem;
+}
+
+.scattered-char:nth-child(5) {
+    top: 35%;
+    left: 12%;
+    animation-delay: -3s;
+    font-size: 1.6rem;
+}
+
+.scattered-char:nth-child(6) {
+    top: 40%;
+    right: 6%;
+    animation-delay: -1.5s;
+    font-size: 2.8rem;
+}
+
+.scattered-char:nth-child(7) {
+    top: 55%;
+    left: 4%;
+    animation-delay: -4s;
+    font-size: 2rem;
+}
+
+.scattered-char:nth-child(8) {
+    top: 50%;
+    right: 12%;
+    animation-delay: -2.5s;
+    font-size: 2.4rem;
+}
+
+.scattered-char:nth-child(9) {
+    top: 65%;
+    left: 10%;
+    animation-delay: -0.8s;
+    font-size: 1.9rem;
+}
+
+.scattered-char:nth-child(10) {
+    top: 70%;
+    right: 5%;
+    animation-delay: -3.5s;
+    font-size: 2.6rem;
+}
+
+.scattered-char:nth-child(11) {
+    top: 80%;
+    left: 6%;
+    animation-delay: -1.2s;
+    font-size: 2.3rem;
+}
+
+.scattered-char:nth-child(12) {
+    top: 85%;
+    right: 10%;
+    animation-delay: -4.5s;
+    font-size: 2rem;
+}
+
+.scattered-char:nth-child(13) {
+    top: 8%;
+    left: 45%;
+    animation-delay: -2.2s;
+    font-size: 1.7rem;
+}
+
+.scattered-char:nth-child(14) {
+    top: 92%;
+    left: 40%;
+    animation-delay: -0.3s;
+    font-size: 2.1rem;
+}
+
+.scattered-char:nth-child(15) {
+    top: 45%;
+    left: 2%;
+    animation-delay: -5s;
+    font-size: 2.7rem;
+}
+
+.scattered-char:nth-child(16) {
+    top: 30%;
+    right: 3%;
+    animation-delay: -1.8s;
+    font-size: 1.5rem;
+}
+
+.scattered-char:nth-child(17) {
+    top: 3%;
+    right: 40%;
+    animation-delay: -3.2s;
+    font-size: 2.4rem;
+}
+
+.scattered-char:nth-child(18) {
+    top: 95%;
+    right: 35%;
+    animation-delay: -0.7s;
+    font-size: 1.8rem;
+}
+
+.scattered-char:nth-child(19) {
+    top: 60%;
+    right: 2%;
+    animation-delay: -4.2s;
+    font-size: 2.9rem;
+}
+
+.scattered-char:nth-child(20) {
+    top: 75%;
+    left: 3%;
+    animation-delay: -2.8s;
+    font-size: 2.2rem;
+}
+
+.worker-auth-container {
+    width: 100%;
+    max-width: 420px;
+}
+
+.worker-branding {
+    text-align: center;
+    margin-bottom: var(--spacing-xl);
+    color: white;
+}
+
+.worker-branding svg {
+    color: #e94560;
+    margin-bottom: var(--spacing-md);
+}
+
+.worker-branding h2 {
+    font-size: 1.5rem;
+    margin-bottom: var(--spacing-xs);
+}
+
+.worker-branding p {
+    opacity: 0.7;
+    font-size: 0.9rem;
+}
+
+.worker-auth-card {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    padding: var(--spacing-2xl);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+}
+
+.worker-auth-header {
+    text-align: center;
+    margin-bottom: var(--spacing-xl);
+}
+
+.worker-auth-header svg {
+    color: #e94560;
+    margin-bottom: var(--spacing-sm);
+}
+
+.worker-auth-header h1 {
+    font-size: 1.75rem;
+    color: #1a1a2e;
+}
+
+.worker-auth-error {
+    background: #FFEBEE;
+    color: #C62828;
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: 8px;
+    margin-bottom: var(--spacing-md);
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+.worker-auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.worker-auth-form label {
+    display: block;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #1a1a2e;
+    margin-bottom: var(--spacing-xs);
+}
+
+.worker-auth-form .input-with-icon {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.worker-auth-form .input-with-icon>svg:first-child {
+    display: none;
+}
+
+.worker-auth-form .input-with-icon input {
+    width: 100%;
+    padding: var(--spacing-sm) var(--spacing-md);
+    padding-left: var(--spacing-md);
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    font-size: 1rem;
+    background: white;
+    transition: all var(--transition-fast);
+}
+
+.worker-auth-form .input-with-icon input:focus {
+    outline: none;
+    border-color: #e94560;
+    box-shadow: 0 0 0 3px rgba(233, 69, 96, 0.1);
+}
+
+.worker-auth-form .toggle-password {
+    position: absolute;
+    right: var(--spacing-md);
+    background: transparent;
+    color: #666;
+    padding: 4px;
+}
+
+.worker-auth-form .toggle-password:focus,
+.worker-login-btn:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.worker-login-btn {
+    width: 100%;
+    padding: var(--spacing-md);
+    background: linear-gradient(135deg, #e94560, #0f3460);
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    margin-top: var(--spacing-sm);
+}
+
+.worker-login-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(233, 69, 96, 0.3);
+}
+
+.worker-login-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.worker-auth-footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-xs);
+    margin-top: var(--spacing-lg);
+    color: #666;
+    font-size: 0.85rem;
+}
+
+.worker-auth-footer svg {
+    color: #e94560;
+}
+
+/* Register page wider container */
+.worker-auth-container.register {
+    max-width: 520px;
+}
+
+/* Two column form row */
+.worker-auth-form .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-md);
+}
+
+/* Select styling */
+.worker-auth-form .input-with-icon select {
+    width: 100%;
+    padding: var(--spacing-sm) var(--spacing-md);
+    padding-left: calc(var(--spacing-md) + 24px);
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    font-size: 1rem;
+    background: white;
+    transition: all var(--transition-fast);
+    cursor: pointer;
+    appearance: none;
+}
+
+.worker-auth-form .input-with-icon select:focus {
+    outline: none;
+    border-color: #e94560;
+    box-shadow: 0 0 0 3px rgba(233, 69, 96, 0.1);
+}
+
+/* Access code group */
+.access-code-group {
+    background: rgba(233, 69, 96, 0.05);
+    padding: var(--spacing-md);
+    border-radius: 12px;
+    border: 1px dashed #e94560;
+}
+
+.access-code-group label {
+    display: flex !important;
+    align-items: center;
+    gap: var(--spacing-xs);
+    color: #e94560 !important;
+}
+
+.access-hint {
+    display: block;
+    margin-top: var(--spacing-xs);
+    font-size: 0.75rem;
+    color: #666;
+}
+
+/* Auth link */
+.worker-auth-link {
+    text-align: center;
+    margin-top: var(--spacing-lg);
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.worker-auth-link a {
+    color: #e94560;
+    font-weight: 600;
+}
+
+.worker-auth-link a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .worker-auth-container.register {
+        max-width: 100%;
+    }
+
+    .worker-auth-form .form-row {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Floating characters animation */
+@keyframes floatCharacters {
+    0% {
+        transform: translateX(-100%);
+    }
+
+    100% {
+        transform: translateX(100vw);
+    }
+}
+
+@keyframes floatCharacters2 {
+    0% {
+        transform: translateX(100vw);
+    }
+
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 0.1;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.2;
+        transform: scale(1.1);
+    }
+}
+
+/* Multiple floating character rows */
+.worker-auth-page .floating-chars {
+    position: absolute;
+    font-size: 2.5rem;
+    opacity: 0.12;
+    white-space: nowrap;
+    pointer-events: none;
+}
+
+.worker-auth-page .chars-row-1 {
+    top: 5%;
+    animation: floatCharacters 25s linear infinite;
+}
+
+.worker-auth-page .chars-row-2 {
+    top: 25%;
+    animation: floatCharacters2 30s linear infinite;
+}
+
+.worker-auth-page .chars-row-3 {
+    bottom: 25%;
+    animation: floatCharacters 35s linear infinite;
+    animation-delay: -10s;
+}
+
+.worker-auth-page .chars-row-4 {
+    bottom: 5%;
+    animation: floatCharacters2 28s linear infinite;
+    animation-delay: -5s;
+}
+
+/* Decorative corner characters */
+.worker-auth-page .corner-char {
+    position: absolute;
+    font-size: 5rem;
+    opacity: 0.08;
+    animation: pulse 4s ease-in-out infinite;
+}
+
+.worker-auth-page .corner-char.top-left {
+    top: 5%;
+    left: 5%;
+}
+
+.worker-auth-page .corner-char.top-right {
+    top: 5%;
+    right: 5%;
+    animation-delay: -1s;
+}
+
+.worker-auth-page .corner-char.bottom-left {
+    bottom: 5%;
+    left: 5%;
+    animation-delay: -2s;
+}
+
+.worker-auth-page .corner-char.bottom-right {
+    bottom: 5%;
+    right: 5%;
+    animation-delay: -3s;
+}

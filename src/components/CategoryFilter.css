@@ -1,0 +1,92 @@
+.category-section {
+    padding: 0 0 var(--spacing-xl) 0;
+    margin-top: -3rem;
+    /* Overlap with hero */
+    position: relative;
+    z-index: 20;
+}
+
+.category-list {
+    display: flex;
+    gap: var(--spacing-md);
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.category-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 90px;
+    height: 90px;
+    background-color: var(--color-surface);
+    border-radius: 16px;
+    transition: all var(--transition-normal);
+    gap: 0.5rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+    color: var(--color-text-muted);
+    border: 1px solid transparent;
+}
+
+.category-btn:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+    color: var(--color-primary);
+    background-color: white;
+    border-color: var(--color-primary);
+}
+
+.category-btn.active {
+    background-color: var(--color-primary);
+    color: white;
+    box-shadow: 0 10px 15px -3px rgba(13, 148, 136, 0.3), 0 4px 6px -2px rgba(13, 148, 136, 0.1);
+    transform: translateY(-2px);
+    border-color: var(--color-primary);
+}
+
+.category-btn .icon-wrapper {
+    margin-bottom: 0.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.category-name {
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: capitalize;
+}
+
+@media (max-width: 640px) {
+    .category-section {
+        margin-top: -2rem;
+    }
+
+    .category-list {
+        gap: var(--spacing-sm);
+        padding: 0 var(--spacing-md);
+        /* Ensure padding on mobile */
+        overflow-x: auto;
+        /* Allow horizontal scroll on mobile */
+        justify-content: flex-start;
+        /* Start aligns for scroll */
+        flex-wrap: nowrap;
+        /* Prevent wrapping on mobile */
+        padding-bottom: 1rem;
+        /* Space for scrollbar or shadow */
+        -webkit-overflow-scrolling: touch;
+    }
+
+    /* Centering wrapper for mobile if items fit, otherwise scroll */
+    .category-list::after {
+        content: '';
+        flex: 0 0 var(--spacing-md);
+    }
+
+    .category-btn {
+        flex-shrink: 0;
+        width: 80px;
+        height: 80px;
+    }
+}
