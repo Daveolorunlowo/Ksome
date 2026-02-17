@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { usePaystackPayment } from 'react-paystack';
 import { Link, useNavigate } from 'react-router-dom';
 import { ArrowLeft, Truck, CreditCard, CheckCircle } from 'lucide-react';
 import { useCart } from '../context/CartContext';
@@ -15,7 +14,7 @@ const Checkout = () => {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [orderComplete, setOrderComplete] = useState(false);
     const [orderId, setOrderId] = useState(null);
-    const [paymentMethod, setPaymentMethod] = useState('cod'); // 'cod' or 'paystack'
+    const [paymentMethod, setPaymentMethod] = useState('cod'); // Default to COD
     const [formData, setFormData] = useState({
         firstName: '',
         lastName: '',
@@ -50,10 +49,10 @@ const Checkout = () => {
     };
 
     const deliveryFee = getDeliveryFee(formData.state);
-
-    // Calculate total based on payment method
     const subTotal = cartTotal + deliveryFee;
-    const orderTotal = subTotal; // No extra payment fee
+
+    // Calculate final total based on payment method
+    const orderTotal = subTotal; // Only COD available now
 
     const handleChange = (e) => {
         setFormData(prev => ({
@@ -62,84 +61,31 @@ const Checkout = () => {
         }));
     };
 
-    // Paystack Configuration
-    const config = {
-        reference: (new Date()).getTime().toString(),
-        email: formData.email,
-        amount: Math.ceil(orderTotal * 100), // Amount in kobo (always integer)
-        publicKey: 'pk_test_xxxxxxxxxxxxxxxxxxxx', // Replace with your actual public key
-    };
-
-    // Initialize Paystack Payment
-    const initializePayment = usePaystackPayment(config);
-
-    const onSuccess = (reference) => {
-        // Payment valid, place order
-        const newOrderId = addOrder({
-            items: [...cartItems],
-            subtotal: cartTotal,
-            deliveryFee,
-            total: orderTotal,
-            customerName: `${formData.firstName} ${formData.lastName}`,
-            email: formData.email,
-            phone: formData.phone,
-            address: formData.address,
-            city: formData.city,
-            state: formData.state,
-            notes: formData.notes,
-            isPaid: true,
-            paymentRef: reference.reference,
-            paymentMethod: 'paystack'
-        });
-
-        completeOrderProcess(newOrderId);
-    };
-
-    const onClose = () => {
-        setIsSubmitting(false);
-        alert("Payment was not completed. Please try again.");
-    };
-
-    const completeOrderProcess = (newOrderId) => {
-        setOrderId(newOrderId);
-        setOrderComplete(true);
-        clearCart();
-        setIsSubmitting(false);
-
-        if (user) {
-            incrementOrderCount();
-        }
-    };
-
     const handleSubmit = (e) => {
         e.preventDefault();
         setIsSubmitting(true);
 
-        if (paymentMethod === 'paystack') {
-            initializePayment(onSuccess, onClose);
-        } else {
-            // Pay on Delivery (COD)
-            // Simulate processing delay
-            setTimeout(() => {
-                const newOrderId = addOrder({
-                    items: [...cartItems],
-                    subtotal: cartTotal,
-                    deliveryFee,
-                    total: orderTotal, // No extra fee for COD
-                    customerName: `${formData.firstName} ${formData.lastName}`,
-                    email: formData.email,
-                    phone: formData.phone,
-                    address: formData.address,
-                    city: formData.city,
-                    state: formData.state,
-                    notes: formData.notes,
-                    isPaid: false,
-                    paymentMethod: 'cod'
-                });
+        // Pay on Delivery (COD)
+        // Simulate processing delay
+        setTimeout(() => {
+            const newOrderId = addOrder({
+                items: [...cartItems],
+                subtotal: cartTotal,
+                deliveryFee,
+                total: orderTotal,
+                customerName: `${formData.firstName} ${formData.lastName}`,
+                email: formData.email,
+                phone: formData.phone,
+                address: formData.address,
+                city: formData.city,
+                state: formData.state,
+                notes: formData.notes,
+                isPaid: false,
+                paymentMethod: 'cod'
+            });
 
-                completeOrderProcess(newOrderId);
-            }, 1500);
-        }
+            completeOrderProcess(newOrderId);
+        }, 1500);
     };
 
     if (cartItems.length === 0 && !orderComplete) {
@@ -305,31 +251,17 @@ const Checkout = () => {
                                 Payment Method
                             </h2>
                             <div className="payment-options">
-                                <label className={`payment-option ${paymentMethod === 'cod' ? 'selected' : ''}`}>
+                                <label className="payment-option selected">
                                     <input
                                         type="radio"
                                         name="payment"
                                         value="cod"
-                                        checked={paymentMethod === 'cod'}
-                                        onChange={() => setPaymentMethod('cod')}
+                                        checked={true}
+                                        readOnly
                                     />
                                     <span className="payment-label">
                                         <strong>Pay on Delivery</strong>
                                         <small>Pay with cash or transfer when your order arrives</small>
-                                    </span>
-                                </label>
-
-                                <label className={`payment-option ${paymentMethod === 'paystack' ? 'selected' : ''}`}>
-                                    <input
-                                        type="radio"
-                                        name="payment"
-                                        value="paystack"
-                                        checked={paymentMethod === 'paystack'}
-                                        onChange={() => setPaymentMethod('paystack')}
-                                    />
-                                    <span className="payment-label">
-                                        <strong>Pay Now (Card/Bank Transfer)</strong>
-                                        <small>Secure online payment via Paystack</small>
                                     </span>
                                 </label>
                             </div>
