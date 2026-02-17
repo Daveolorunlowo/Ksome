@@ -25,61 +25,117 @@
     opacity: 0.9;
 }
 
-.story-block {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--spacing-3xl);
-    align-items: center;
-    margin-bottom: var(--spacing-4xl);
-}
-
-.story-block.reverse {
-    direction: rtl;
-    /* Simple way to swap, need to reset text align */
-}
-
-.story-block.reverse .story-text {
-    direction: ltr;
-    text-align: left;
-}
-
-.story-text h2 {
-    font-family: var(--font-serif);
-    color: var(--color-primary);
-    font-size: 2.5rem;
-    margin-bottom: var(--spacing-md);
-}
-
-.story-text p {
-    margin-bottom: var(--spacing-md);
-    color: var(--color-text-muted);
-    font-size: 1.1rem;
-    line-height: 1.8;
-}
-
-.story-image {
-    background-color: var(--color-border);
-    height: 400px;
-    border-radius: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--color-text-light);
-    font-weight: 600;
-    box-shadow: var(--shadow-lg);
+/* Modern Story Section */
+.story-section-modern {
+    padding: 80px 0;
     overflow: hidden;
 }
 
-@media (max-width: 768px) {
+.story-layout-overlap {
+    position: relative;
+    margin-bottom: 120px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+}
 
-    .story-block,
-    .story-block.reverse {
+.story-layout-overlap.reverse {
+    direction: ltr;
+    /* Ensure LTR for grid placement */
+}
+
+.story-visual-bg {
+    position: relative;
+    height: 500px;
+    width: 120%;
+    /* Overlap width */
+    border-radius: 20px;
+    overflow: hidden;
+    z-index: 1;
+}
+
+/* Reverse Layout Specifics */
+.story-layout-overlap.reverse .story-visual-bg {
+    grid-column: 2;
+    transform: translateX(-20%);
+    /* Pull left to create overlap space */
+}
+
+.story-bg-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.story-card-floating {
+    background: white;
+    padding: 3rem;
+    border-radius: 16px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+    position: relative;
+    z-index: 2;
+    max-width: 600px;
+}
+
+/* Normal Layout: Text on Right, Image Left */
+.story-layout-overlap .story-card-floating {
+    margin-left: -100px;
+    /* Pull left over image */
+}
+
+/* Reverse Layout: Text on Left, Image Right */
+.story-layout-overlap.reverse .story-card-floating {
+    grid-column: 1;
+    grid-row: 1;
+    margin-right: -100px;
+    /* Pull right over image */
+    margin-left: 0;
+}
+
+.story-card-floating h2 {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    color: var(--color-primary);
+    margin-bottom: 1.5rem;
+}
+
+.story-card-floating p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: var(--color-text);
+    margin-bottom: 1rem;
+}
+
+@media (max-width: 900px) {
+
+    .story-layout-overlap,
+    .story-layout-overlap.reverse {
         grid-template-columns: 1fr;
-        direction: ltr;
-        /* Reset for mobile stack */
+        margin-bottom: 80px;
+        display: flex;
+        flex-direction: column;
     }
 
-    .about-title {
-        font-size: 2.5rem;
+    .story-visual-bg,
+    .story-layout-overlap.reverse .story-visual-bg {
+        width: 100%;
+        height: 300px;
+        transform: none;
+        margin-bottom: -40px;
+        z-index: 1;
+        grid-column: auto;
     }
+
+    .story-card-floating,
+    .story-layout-overlap.reverse .story-card-floating {
+        margin: 0 20px;
+        width: auto;
+        padding: 2rem;
+        grid-column: auto;
+    }
+}
+
+.about-title {
+    font-size: 2.5rem;
+}
 }

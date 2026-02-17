@@ -3,10 +3,12 @@ import { useSearchParams } from 'react-router-dom';
 import { ChevronDown, Search, ChevronLeft, ChevronRight } from 'lucide-react';
 import ShopSidebar from '../components/ShopSidebar';
 import ShopGrid from '../components/ShopGrid';
-import { products } from '../data/products';
+// import { products } from '../data/products'; // OLD: Static import
+import { useProducts } from '../context/ProductsContext'; // NEW: Context import
 import './Shop.css';
 
 const Shop = () => {
+    const { products } = useProducts(); // Get dynamic products
     const [searchParams] = useSearchParams();
     const [currentPage, setCurrentPage] = useState(1);
     const [selectedCategory, setSelectedCategory] = useState(null);

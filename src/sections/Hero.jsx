@@ -32,7 +32,7 @@ const Hero = () => {
                         <h1 className="hero-title">
                             Nigerian Flavors, <br />
                             <span className="text-highlight">Delivered</span> to Your <br />
-                            Door & Portfolio.
+                            Door.
                         </h1>
 
                         <p className="hero-description">

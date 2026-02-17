@@ -12,6 +12,7 @@ import Checkout from './pages/Checkout';
 import Orders from './pages/Orders';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import ProductDetails from './pages/ProductDetails';
 import Account from './pages/Account';
 import WorkerLogin from './pages/WorkerLogin';
 import WorkerRegister from './pages/WorkerRegister';
@@ -51,6 +52,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/shop" element={<Shop />} />
+        <Route path="/product/:id" element={<ProductDetails />} />
         <Route path="/specials" element={<Specials />} />
         <Route path="/favorites" element={<Favorites />} />
         <Route path="/checkout" element={<Checkout />} />

@@ -1,7 +1,8 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { ShoppingCart, ArrowRight } from 'lucide-react';
-import { products } from '../data/products';
+import { ShoppingCart, ArrowRight, Star } from 'lucide-react';
+// import { products } from '../data/products'; // OLD: Static import
+import { useProducts } from '../context/ProductsContext'; // NEW: Context import
 import { useCart } from '../context/CartContext';
 import './DailySpecials.css';
 
@@ -19,7 +20,14 @@ const itemVariants = {
 };
 
 const DailySpecials = () => {
+    const { products, rateProduct } = useProducts(); // Get dynamic products
     const { addToCart } = useCart();
+
+    const handleRating = (e, productId, rating) => {
+        e.preventDefault();
+        e.stopPropagation();
+        rateProduct(productId, rating);
+    };
 
     // Select specific items to match the "Taste the Culture" design
     // IDs based on products.js: 2 (Chin Chin), 11 (Suya), 5 (Hot Puff Puff), 6 (Plantain Chips)
@@ -56,6 +64,19 @@ const DailySpecials = () => {
 
                             <div className="card-content">
                                 <h3 className="card-title">{product.title}</h3>
+                                <div className="card-rating" style={{ display: 'flex', gap: '2px', marginBottom: '8px' }}>
+                                    {[...Array(5)].map((_, i) => (
+                                        <Star
+                                            key={i}
+                                            size={14}
+                                            fill={i < Math.floor(product.rating) ? "#FFC107" : "none"}
+                                            color={i < Math.floor(product.rating) ? "#FFC107" : "#e4e5e9"}
+                                            onClick={(e) => handleRating(e, product.id, i + 1)}
+                                            style={{ cursor: 'pointer' }}
+                                        />
+                                    ))}
+                                    <span style={{ fontSize: '0.8rem', color: '#888', marginLeft: '4px' }}>({product.reviews})</span>
+                                </div>
                                 <p className="card-desc">{product.description}</p>
 
                                 <div className="card-footer">
