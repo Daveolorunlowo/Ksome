@@ -13,21 +13,26 @@ export const useProducts = () => {
 
 export const ProductsProvider = ({ children }) => {
     const [products, setProducts] = useState(() => {
-        const savedRatings = localStorage.getItem('ksome-ratings');
-        if (savedRatings) {
-            const parsedRatings = JSON.parse(savedRatings);
-            return initialProducts.map(product => {
-                const saved = parsedRatings[product.id];
-                if (saved) {
-                    return {
-                        ...product,
-                        rating: saved.rating,
-                        reviews: saved.reviewCount || saved.reviews, // Handle legacy number or new count
-                        reviewList: saved.reviewList || [] // New array for review objects
-                    };
-                }
-                return { ...product, reviewList: [] };
-            });
+        try {
+            const savedRatings = localStorage.getItem('ksome-ratings');
+            if (savedRatings) {
+                const parsedRatings = JSON.parse(savedRatings);
+                return initialProducts.map(product => {
+                    const saved = parsedRatings[product.id];
+                    if (saved) {
+                        return {
+                            ...product,
+                            rating: saved.rating ?? product.rating,
+                            reviews: saved.reviewCount ?? saved.reviews ?? product.reviews,
+                            reviewList: Array.isArray(saved.reviewList) ? saved.reviewList : []
+                        };
+                    }
+                    return { ...product, reviewList: [] };
+                });
+            }
+        } catch (e) {
+            console.warn('Failed to load saved ratings, resetting:', e);
+            localStorage.removeItem('ksome-ratings');
         }
         return initialProducts.map(p => ({ ...p, reviewList: [] }));
     });
@@ -63,31 +68,13 @@ export const ProductsProvider = ({ children }) => {
                         ...reviewData
                     };
 
-                    const updatedList = [newReview, ...product.reviewList];
+                    const safeReviewList = Array.isArray(product.reviewList) ? product.reviewList : [];
+                    const updatedList = [newReview, ...safeReviewList];
 
-                    // Calculate new average
-                    // We need to account for the initial "base" rating from products.js if we want it to persist?
-                    // OR we transition to fully dynamic. 
-                    // Let's go fully dynamic based on the list + initial weight?
-                    // Simple approach: New Average = Sum of all ratings / Count
-
-                    // IF there are no previous reviews, we start fresh? 
-                    // Problem: products.js has "starting" ratings (4.8, 45 reviews).
-                    // We should treat those 45 as "ghost" reviews with the initial average.
-
-                    const initialWeight = product.reviews - product.reviewList.length; // "Ghost" reviews count
-                    const initialScore = initialWeight * (initialProducts.find(p => p.id === productId).rating);
-
-                    const currentSum = product.reviewList.reduce((acc, r) => acc + r.rating, 0);
-                    const newSum = currentSum + reviewData.rating;
-
-                    // Total Score = (Ghost Reviews * Base Rating) + (Real Reviews Sum)
-                    // We can simplify and just do weighted average of current state + new rating
-
-                    // Current Total Score = Current Rating * Current Count
-                    const currentTotalScore = product.rating * product.reviews;
-                    const newTotalScore = currentTotalScore + reviewData.rating;
-                    const newCount = product.reviews + 1;
+                    // Weighted average: treat existing rating*reviews as the base score
+                    const currentTotalScore = (product.rating ?? 0) * (product.reviews ?? 0);
+                    const newTotalScore = currentTotalScore + (reviewData.rating ?? 5);
+                    const newCount = (product.reviews ?? 0) + 1;
                     const newAverage = newTotalScore / newCount;
 
                     return {
