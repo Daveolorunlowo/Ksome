@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import ComingSoonModal from './components/ComingSoonModal';
@@ -21,6 +21,7 @@ import About from './pages/About';
 import Support from './pages/Support';
 import Legal from './pages/Legal';
 import Settings from './pages/Settings';
+import SpecialOrders from './pages/SpecialOrders';
 import { useAuth } from './context/AuthContext';
 import './components/Header.css';
 
@@ -36,6 +37,8 @@ const themes = {
 
 function App() {
   const { user } = useAuth();
+  const location = useLocation();
+  const isWorkerRoute = location.pathname.startsWith('/worker');
 
   // Apply user's saved theme globally
   useEffect(() => {
@@ -48,7 +51,7 @@ function App() {
 
   return (
     <div className="app-container">
-      <Header />
+      {!isWorkerRoute && <Header />}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/shop" element={<Shop />} />
@@ -67,10 +70,11 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/support" element={<Support />} />
         <Route path="/legal" element={<Legal />} />
+        <Route path="/special-orders" element={<SpecialOrders />} />
         <Route path="*" element={<Home />} /> {/* Fallback */}
       </Routes>
       <ComingSoonModal />
-      <Footer />
+      {!isWorkerRoute && <Footer />}
     </div>
   )
 }

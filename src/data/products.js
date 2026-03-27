@@ -8,6 +8,12 @@ import potatoChipsImg from '../assets/potato_chips.jpg';
 import cakeSliceImg from '../assets/cake_slice.png';
 import drinksImg from '../assets/drinks.png';
 import provisionsImg from '../assets/provisions.png';
+import cokeImg from '../assets/coke.jpg';
+import fantaImg from '../assets/fanta.jpg';
+import spriteImg from '../assets/sprite.jpg';
+import pepsiImg from '../assets/pepsi.jpg';
+import maltaImg from '../assets/malta.jpg';
+import teemImg from '../assets/teem.jpg';
 
 export const products = [
     {
@@ -100,13 +106,68 @@ export const products = [
     },
     {
         id: 9,
-        title: 'Assorted Drinks',
-        price: 500,
-        rating: 4.7,
-        reviews: 112,
-        description: 'Water, soft drinks, and wine selection.',
-        image: drinksImg,
+        title: 'Coca-Cola (50cl)',
+        price: 400,
+        rating: 4.9,
+        reviews: 524,
+        description: 'Ice-cold Coca-Cola, the classic refreshment. Chilled and ready to drink.',
+        image: cokeImg,
         badge: 'Chilled',
+        category: 'drinks'
+    },
+    {
+        id: 9.1,
+        title: 'Fanta Orange (50cl)',
+        price: 400,
+        rating: 4.8,
+        reviews: 318,
+        description: 'Fizzy, fruity and orange-flavoured Fanta. A favourite among all ages.',
+        image: fantaImg,
+        badge: 'Fruity',
+        category: 'drinks'
+    },
+    {
+        id: 9.2,
+        title: 'Sprite (50cl)',
+        price: 400,
+        rating: 4.7,
+        reviews: 267,
+        description: 'Cool, crisp lemon-lime Sprite. Light and refreshing, zero caffeine.',
+        image: spriteImg,
+        badge: null,
+        category: 'drinks'
+    },
+    {
+        id: 9.3,
+        title: 'Teem Bitter Lemon (50cl)',
+        price: 350,
+        rating: 4.6,
+        reviews: 143,
+        description: 'Nigeria\'s beloved Teem bitter lemon drink — uniquely tangy and refreshing.',
+        image: teemImg,
+        badge: 'Nigerian Fav',
+        category: 'drinks'
+    },
+    {
+        id: 9.4,
+        title: 'Malta Guinness (33cl)',
+        price: 450,
+        rating: 4.8,
+        reviews: 289,
+        description: 'Rich, malty non-alcoholic beverage. Packed with B vitamins and full of flavour.',
+        image: maltaImg,
+        badge: 'Energy Boost',
+        category: 'drinks'
+    },
+    {
+        id: 9.5,
+        title: 'Pepsi (50cl)',
+        price: 400,
+        rating: 4.7,
+        reviews: 201,
+        description: 'Bold, refreshing Pepsi cola with that unmistakable taste. Ice cold and fizzy.',
+        image: pepsiImg,
+        badge: null,
         category: 'drinks'
     },
     {

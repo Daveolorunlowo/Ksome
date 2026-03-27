@@ -90,7 +90,7 @@ const Support = () => {
                                 <div className="policy-content">
                                     <p><strong>Processing Time:</strong> All orders are processed within 1 business day.</p>
                                     <p><strong>Delivery Areas:</strong> We currently ship to all states in Nigeria. International shipping is coming soon!</p>
-                                    <p><strong>Shipping Rates:</strong> Flat rate of ₦1,500 for Lagos orders. Calculated rates for other states.</p>
+                                    <p><strong>Shipping Rates:</strong> Flat rate of ₦1,500 for Osun orders. Calculated rates for other states.</p>
                                 </div>
                             </motion.div>
                         )}

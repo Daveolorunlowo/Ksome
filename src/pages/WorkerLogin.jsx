@@ -41,33 +41,7 @@ const WorkerLogin = () => {
 
     return (
         <main className="worker-auth-page">
-            {/* Scattered character decorations */}
-            <span className="scattered-char">🍕</span>
-            <span className="scattered-char">👨‍🍳</span>
-            <span className="scattered-char">🥧</span>
-            <span className="scattered-char">🍰</span>
-            <span className="scattered-char">🧁</span>
-            <span className="scattered-char">🍪</span>
-            <span className="scattered-char">🥐</span>
-            <span className="scattered-char">🍩</span>
-            <span className="scattered-char">🎂</span>
-            <span className="scattered-char">🥮</span>
-            <span className="scattered-char">🍞</span>
-            <span className="scattered-char">🥖</span>
-            <span className="scattered-char">🥯</span>
-            <span className="scattered-char">🧇</span>
-            <span className="scattered-char">🥞</span>
-            <span className="scattered-char">🍳</span>
-            <span className="scattered-char">🥚</span>
-            <span className="scattered-char">🧈</span>
-            <span className="scattered-char">🥛</span>
-            <span className="scattered-char">☕</span>
 
-            {/* Corner decorations */}
-            <div className="corner-char top-left">👨‍🍳</div>
-            <div className="corner-char top-right">🍰</div>
-            <div className="corner-char bottom-left">🥧</div>
-            <div className="corner-char bottom-right">🧁</div>
 
             <div className="worker-auth-container">
                 <div className="worker-branding">

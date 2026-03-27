@@ -1,5 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import puffPuffImg from '../assets/hot_puff_puff_new.jpg';
+import moiMoiImg from '../assets/steaming_moi_moi.jpg';
 import './About.css';
 
 const About = () => {
@@ -33,8 +35,8 @@ const About = () => {
                     <div className="story-layout-overlap">
                         <div className="story-visual-bg">
                             <img
-                                src="https://images.unsplash.com/photo-1556910103-1c02745a30bf?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80"
-                                alt="Bustling kitchen preparation"
+                                src={puffPuffImg}
+                                alt="Fresh hot puff puff being made"
                                 className="story-bg-img"
                             />
                         </div>
@@ -59,8 +61,8 @@ const About = () => {
                     <div className="story-layout-overlap reverse">
                         <div className="story-visual-bg">
                             <img
-                                src="https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80"
-                                alt="Fresh African ingredients"
+                                src={moiMoiImg}
+                                alt="Traditional Nigerian comfort food"
                                 className="story-bg-img"
                             />
                         </div>

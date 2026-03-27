@@ -92,6 +92,7 @@ const Header = () => {
                     <nav className="desktop-nav">
                         <Link to="/" className="nav-link">Home</Link>
                         <Link to="/shop" className="nav-link">Menu</Link>
+                        <Link to="/special-orders" className="nav-link">Special Orders</Link>
                         <a href="#" onClick={handleInvestmentClick} className="nav-link">Investment</a>
                         <Link to="/about" className="nav-link">Our Story</Link>
                         <Link to="/support" className="nav-link">Contact</Link>
@@ -155,6 +156,18 @@ const Header = () => {
                             </AnimatePresence>
                         </div>
 
+                        {/* Cart Icon Button */}
+                        <button
+                            className="cart-icon-btn"
+                            onClick={() => setIsCartOpen(true)}
+                            aria-label="Open cart"
+                        >
+                            <ShoppingCart size={22} />
+                            {cartCount > 0 && (
+                                <span className="cart-badge">{cartCount}</span>
+                            )}
+                        </button>
+
                         {isAuthenticated ? (
                             <Link to="/account" className="user-account-btn">
                                 <div className="user-avatar-sm">
@@ -167,9 +180,9 @@ const Header = () => {
                             </Link>
                         )}
 
-                        <button className="btn-primary-sm">
+                        <Link to="/register" className="btn-primary-sm">
                             Join KSOME
-                        </button>
+                        </Link>
                     </div>
 
                     {/* Mobile Menu Button */}
@@ -192,6 +205,7 @@ const Header = () => {
                                 <div className="mobile-nav-content">
                                     <Link to="/" className="mobile-nav-link" onClick={() => setIsMobileMenuOpen(false)}>Home</Link>
                                     <Link to="/shop" className="mobile-nav-link" onClick={() => setIsMobileMenuOpen(false)}>Menu</Link>
+                                    <Link to="/special-orders" className="mobile-nav-link" onClick={() => setIsMobileMenuOpen(false)}>Special Orders</Link>
                                     <a href="#" className="mobile-nav-link" onClick={handleInvestmentClick}>Investment</a>
                                     <Link to="/about" className="mobile-nav-link" onClick={() => setIsMobileMenuOpen(false)}>Our Story</Link>
                                     <Link to="/support" className="mobile-nav-link" onClick={() => setIsMobileMenuOpen(false)}>Contact</Link>

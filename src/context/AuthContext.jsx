@@ -278,6 +278,7 @@ export const AuthProvider = ({ children }) => {
             value={{
                 user,
                 worker,
+                users,
                 isAuthenticated: !!user,
                 isWorkerAuthenticated: !!worker,
                 register,
