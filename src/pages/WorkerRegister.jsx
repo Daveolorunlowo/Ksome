@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Mail, Lock, User, Phone, Briefcase, Eye, EyeOff, Shield, UserPlus } from 'lucide-react';
+import { Mail, Lock, User, Phone, Briefcase, Eye, EyeOff, Shield, UserPlus, CheckCircle } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
+import TermsModal from '../components/TermsModal';
 import './WorkerAuth.css';
 
 const WorkerRegister = () => {
@@ -10,6 +11,8 @@ const WorkerRegister = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
+    const [showTermsModal, setShowTermsModal] = useState(false);
+    const [agreedToTerms, setAgreedToTerms] = useState(false);
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -32,6 +35,12 @@ const WorkerRegister = () => {
         e.preventDefault();
         setLoading(true);
         setError('');
+
+        if (!agreedToTerms) {
+            setError('You must agree to the Staff Handbook terms');
+            setLoading(false);
+            return;
+        }
 
         // Validation
         if (formData.password !== formData.confirmPassword) {
@@ -214,10 +223,36 @@ const WorkerRegister = () => {
                             <small className="access-hint">Contact your manager for the staff access code</small>
                         </div>
 
+                        <div className="terms-agreement">
+                            <label className="checkbox-container">
+                                <input
+                                    type="checkbox"
+                                    checked={agreedToTerms}
+                                    onChange={(e) => setAgreedToTerms(e.target.checked)}
+                                />
+                                <span className="checkmark"></span>
+                                <span className="agreement-text">
+                                    I have read and agree to the{' '}
+                                    <button
+                                        type="button"
+                                        className="terms-link"
+                                        onClick={() => setShowTermsModal(true)}
+                                    >
+                                        Staff Handbook
+                                    </button>
+                                </span>
+                            </label>
+                        </div>
+
                         <button type="submit" className="worker-login-btn" disabled={loading}>
                             {loading ? 'Creating Account...' : 'Register as Staff'}
                         </button>
                     </form>
+
+                    <TermsModal
+                        isOpen={showTermsModal}
+                        onClose={() => setShowTermsModal(false)}
+                    />
 
                     <p className="worker-auth-link">
                         Already have a staff account?{' '}
