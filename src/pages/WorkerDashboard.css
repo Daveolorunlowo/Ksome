@@ -689,50 +689,113 @@
 
 @media (max-width: 768px) {
     .admin-layout {
-        display: flex;
-        flex-direction: column;
+        display: block; /* Removing flex so bottom nav can be fixed */
+        padding-bottom: 80px; /* Space for bottom nav */
     }
 
+    /* Fixed Bottom Navigation Style */
     .admin-sidebar {
-        height: auto;
-        position: static;
+        height: 70px;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        top: auto;
+        z-index: 100;
         flex-direction: row;
         align-items: center;
-        padding: 16px;
+        justify-content: space-around;
+        padding: 0 16px;
         border-right: none;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-        box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        border-bottom: none;
+        box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.8);
+        background: rgba(18, 18, 22, 0.85);
+        backdrop-filter: blur(30px);
+        -webkit-backdrop-filter: blur(30px);
+        border-radius: 20px 20px 0 0;
+    }
+
+    .sidebar-brand h2,
+    .sidebar-brand svg,
+    .sidebar-avatar-container {
+        display: none;
     }
 
     .sidebar-brand {
-        margin: 0;
-        padding: 0;
-        border: none;
-    }
-
-    .sidebar-brand h2 {
-        display: block;
-    }
-
-    .sidebar-avatar-container,
-    .admin-logout-btn {
         display: none;
     }
 
     .sidebar-nav {
         flex-direction: row;
-        margin-left: auto;
+        gap: 8px;
+        margin: 0;
+        justify-content: space-around;
+        width: 100%;
+    }
+
+    .nav-item {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 4px;
+        padding: 8px 12px;
+        border: none;
+        border-radius: 12px;
+    }
+
+    .nav-item::before {
+        display: none;
+    }
+
+    .nav-item svg {
+        margin: 0;
     }
 
     .nav-item span {
-        display: none;
+        display: block;
+        font-size: 0.65rem;
+        margin: 0;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .nav-item.active {
+        background: rgba(233, 69, 96, 0.15);
+        color: #ff6b81;
+        border: none;
+        transform: translateY(-4px);
+    }
+
+    .admin-logout-btn {
+        display: none; /* Hide standard logout, maybe we add it inside a menu or keep it in top header */
+    }
+
+    .admin-content {
+        padding: 24px 16px;
+    }
+
+    .admin-header h1 {
+        font-size: 1.8rem;
+    }
+
+    .admin-stats-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
     }
 
     .orders-grid {
         grid-template-columns: 1fr;
     }
+}
+
+/* Very small devices */
+@media (max-width: 380px) {
+    .nav-item span {
+        display: none;
+    }
     
     .admin-content {
-        padding: 24px;
+        padding: 16px 12px;
     }
 }
