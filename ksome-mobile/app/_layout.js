@@ -18,6 +18,11 @@ export default function RootLayout() {
             headerShown: true,
             title: 'My Cart',
           }} />
+          <Stack.Screen name="orders" options={{ 
+            presentation: 'modal',
+            headerShown: true,
+            title: 'My Orders',
+          }} />
         </Stack>
       </FavoritesProvider>
     </CartProvider>

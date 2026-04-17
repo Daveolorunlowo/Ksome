@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, ScrollView, StyleSheet, Image, TouchableOpacity, FlatList, Dimensions } from 'react-native';
-import { motion } from 'framer-motion'; // Framer motion doesn't work in RN, need to use Reanimated or similar, but for now standard RN
+// import { motion } from 'framer-motion'; // Removed as it is not compatible with React Native
+
 import { ArrowRight, Star, Shield, Truck, Zap } from 'lucide-react-native';
 import { products } from '../../src/data/products';
 import { useCart } from '../../src/context/CartContext';

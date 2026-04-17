@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView } from 'react-native';
 import { User, Package, Heart, Settings, LogOut, ChevronRight, Star, Clock } from 'lucide-react-native';
+import { router } from 'expo-router';
 
 export default function Account() {
   const user = {
@@ -36,9 +37,23 @@ export default function Account() {
 
       {/* Menu Sections */}
       <View style={styles.menu}>
-        <MenuItem icon={<Package color="#065f46" size={24} />} title="My Orders" desc="History and tracking" />
-        <MenuItem icon={<Heart color="#065f46" size={24} />} title="Favorites" desc="Manage your wishlist" />
-        <MenuItem icon={<Settings color="#065f46" size={24} />} title="Settings" desc="Profile and privacy" />
+        <MenuItem 
+          icon={<Package color="#065f46" size={24} />} 
+          title="My Orders" 
+          desc="History and tracking" 
+          onPress={() => router.push('/orders')}
+        />
+        <MenuItem 
+          icon={<Heart color="#065f46" size={24} />} 
+          title="Favorites" 
+          desc="Manage your wishlist" 
+          onPress={() => router.push('/favorites')}
+        />
+        <MenuItem 
+          icon={<Settings color="#065f46" size={24} />} 
+          title="Settings" 
+          desc="Profile and privacy" 
+        />
         <TouchableOpacity style={styles.logoutBtn}>
           <LogOut color="#ef4444" size={24} />
           <Text style={styles.logoutText}>Logout</Text>
@@ -59,9 +74,9 @@ function StatBox({ label, value }) {
   );
 }
 
-function MenuItem({ icon, title, desc }) {
+function MenuItem({ icon, title, desc, onPress }) {
   return (
-    <TouchableOpacity style={styles.menuItem}>
+    <TouchableOpacity style={styles.menuItem} onPress={onPress}>
       <View style={styles.menuIcon}>{icon}</View>
       <View style={styles.menuContent}>
         <Text style={styles.menuTitle}>{title}</Text>

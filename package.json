@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "mobile": "cd ksome-mobile && npx expo start --tunnel",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"
