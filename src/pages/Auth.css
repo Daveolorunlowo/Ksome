@@ -151,6 +151,52 @@
     text-decoration: underline;
 }
 
+/* Verification Section Styles */
+.verification-section {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-md);
+}
+
+.verification-icon {
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
+}
+
+.verification-section h2 {
+    font-family: var(--font-serif);
+    font-size: 1.5rem;
+    color: var(--color-text-main);
+    margin-bottom: var(--spacing-xs);
+}
+
+.verification-section p {
+    color: var(--color-text-muted);
+    margin-bottom: var(--spacing-md);
+}
+
+.verification-input {
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: 0.5rem;
+    width: 200px !important;
+    padding: var(--spacing-md) !important;
+}
+
+.btn-secondary {
+    background: rgba(255, 255, 255, 0.8);
+    color: var(--color-text-main);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.9);
+    border-color: var(--color-primary);
+}
+
 @media (max-width: 500px) {
     .auth-page {
         padding: var(--spacing-md);
@@ -163,5 +209,10 @@
     .auth-card {
         padding: var(--spacing-lg);
         width: 100%;
+    }
+
+    .verification-input {
+        width: 180px !important;
+        font-size: 1.25rem;
     }
 }
